@@ -146,16 +146,17 @@ Requires:       ncurses-base
 	
 %build
 	
-%meson
-	
-%meson_build
+export CFLAGS="$CFLAGS -O3"
+meson --buildtype=release --prefix=/usr -Db_lto=true ../..
+ninja
 	
 	
  
 	
 %install
 	
-%meson_install
+ninja test
+ninja install
 	
 # Will be installed to correct location with rpm macros
 	
@@ -166,8 +167,7 @@ rm %{buildroot}%{_docdir}/%{name}/LICENSE
  
 	
 %check
-	
-%meson_test
+
 	
 desktop-file-validate \
 	
