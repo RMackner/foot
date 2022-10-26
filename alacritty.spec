@@ -1,114 +1,74 @@
-%define githash 2a2d38fcaa0c98262885681b901d67fea231bc50
-%define releasenum 44
+%global debug_package %{nil}
+%define build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
+%global appname alacritty
 
+Name:           %{appname}-git
+Version:        %{build_timestamp}
+Release:        1%{?dist}
+Summary:        Fast, cross-platform, OpenGL terminal emulator
 
-%define shorthash %(c=%{githash}; echo ${c:0:10})
+License:        ASL 2.0 or MIT
+URL:            https://github.com/alacritty/alacritty
+Source:         https://github.com/alacritty/alacritty/archive/master/alacritty-master.tar.gz
 
-Name:          alacritty
-Version:       0.11.0
-Release:       0.%{releasenum}.git.%{shorthash}%{?dist}
-Summary:       A cross-platform, GPU enhanced terminal emulator
-License:       ASL 2.0
-URL:           https://github.com/alacritty/alacritty
-VCS:           https://github.com/alacritty/alacritty.git
-Source:        %{url}/archive/%{githash}/%{name}-%{githash}.tar.gz
-
-BuildRequires: rust
-BuildRequires: cargo
-BuildRequires: cmake
-BuildRequires: gcc-c++
-BuildRequires: python3
-BuildRequires: freetype-devel
-BuildRequires: fontconfig-devel
-BuildRequires: libxcb-devel
-BuildRequires: desktop-file-utils
-BuildRequires: ncurses
+BuildRequires:  gcc-c++ pkg-config desktop-file-utils
+BuildRequires:  cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel
+%if 0%{?fedora} >= 34
+BuildRequires:  rust cargo
+%endif
 
 %description
-Alacritty is a terminal emulator with a strong focus on simplicity and
-performance. With such a strong focus on performance, included features are
-carefully considered and you can always expect Alacritty to be blazingly fast.
-By making sane choices for defaults, Alacritty requires no additional setup.
-However, it does allow configuration of many aspects of the terminal.
-
-%description -n alacritty
-	
- 
-	
-%files       -n alacritty
-	
-%license LICENSE-APACHE
-	
-%doc README.md
-	
-%{_bindir}/alacritty
-	
-%dir %{_datadir}/%{crate}
-	
-%{_mandir}/man1/alacritty.1*
-	
-%{_mandir}/man1/alacritty-msg.1*
-	
-%{_datadir}/applications/Alacritty.desktop
-	
-%{_datadir}/pixmaps/Alacritty.svg
-	
-%{_datadir}/%{crate}/alacritty.yml
-	
-%dir %{_datadir}/bash-completion
-	
-%dir %{_datadir}/bash-completion/completions
-	
-%{_datadir}/bash-completion/completions/alacritty
-	
-%dir %{_datadir}/zsh
-	
-%dir %{_datadir}/zsh/site-functions
-	
-%{_datadir}/zsh/site-functions/_alacritty
-	
-%dir %{_datadir}/fish
-	
-%dir %{_datadir}/fish/vendor_completions.d
-	
-%{_datadir}/fish/vendor_completions.d/alacritty.fish
+Fast, cross-platform, OpenGL terminal emulator.
 
 %prep
-%autosetup -n alacritty-%{githash} -p1
-%cargo_prep
+%autosetup -n alacritty-master -p1
 
-%generate_buildrequires
-%cargo_generate_buildrequires
+%if 0%{?centos} <= 8
+if [ ! -d $HOME/.cargo ]; then
+  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+fi
+%endif
 
 %build
-%cargo_build
-	
-
+%if 0%{?fedora} >= 34
+cargo build --release
+%elif 0%{?centos} <= 8
+$HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
-	
-%cargo_install
-install -p -D -m755 target/release/alacritty         %{buildroot}%{_bindir}/alacritty
-install -p -D -m644 extra/linux/Alacritty.desktop    %{buildroot}%{_datadir}/applications/Alacritty.desktop
-install -p -D -m644 extra/logo/alacritty-term.svg    %{buildroot}%{_datadir}/pixmaps/Alacritty.svg
-install -p -D -m644 alacritty.yml                    %{buildroot}%{_datadir}/alacritty/alacritty.yml
-tic     -xe alacritty-direct \
-                    extra/alacritty.info       -o    %{buildroot}%{_datadir}/terminfo
-install -p -D -m644 extra/completions/alacritty.bash %{buildroot}%{_datadir}/bash-completion/completions/alacritty
-install -p -D -m644 extra/completions/_alacritty     %{buildroot}%{_datadir}/zsh/site-functions/_alacritty
-install -p -D -m644 extra/completions/alacritty.fish %{buildroot}%{_datadir}/fish/vendor_completions.d/alacritty.fish
-install -p -D -m644 extra/alacritty.man              %{buildroot}%{_mandir}/man1/alacritty.1
+install -pDm755 target/release/alacritty %{buildroot}%{_bindir}/%{appname}
+
+install -pDm644 extra/linux/Alacritty.desktop %{buildroot}%{_datadir}/applications/Alacritty.desktop
+install -pDm644 extra/logo/alacritty-term.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/Alacritty.svg
+
+install -pDm644 alacritty.yml %{buildroot}%{_datadir}/alacritty/alacritty.yml
+
+install -pDm644 extra/completions/alacritty.bash %{buildroot}%{_datadir}/bash-completion/completions/alacritty
+install -pDm644 extra/completions/_alacritty %{buildroot}%{_datadir}/zsh/site-functions/_alacritty
+install -pDm644 extra/completions/alacritty.fish %{buildroot}%{_datadir}/fish/vendor_completions.d/alacritty.fish
+
+gzip --best extra/alacritty.man
+install -pDm644 extra/alacritty.man.gz %{buildroot}%{_mandir}/man1/alacritty.1.gz
 
 %check
-desktop-file-validate %{buildroot}%{_datadir}/applications/Alacritty.desktop
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 
 %files
-%{_bindir}/alacritty
+%license LICENSE*
+%doc README.md
+%{_bindir}/%{appname}
+
 %{_datadir}/applications/Alacritty.desktop
-%{_datadir}/pixmaps/Alacritty.svg
+%{_datadir}/icons/hicolor/scalable/apps/Alacritty.svg
+
+%dir %{_datadir}/alacritty
 %{_datadir}/alacritty/alacritty.yml
-%{_datadir}/terminfo/a/alacritty-direct
+
 %{_datadir}/bash-completion/completions/alacritty
 %{_datadir}/zsh/site-functions/_alacritty
 %{_datadir}/fish/vendor_completions.d/alacritty.fish
-%{_mandir}/man1/alacritty.1*
+
+%{_mandir}/man1/*.1.gz
+
+%changelog
