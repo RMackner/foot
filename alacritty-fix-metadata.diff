@@ -1,44 +1,21 @@
-	
 diff --git alacritty-0.10.1/Cargo.toml~ alacritty-0.10.1/Cargo.toml
-	
 index 323b11f4eb..0597bc1001 100644
-	
 --- alacritty-0.10.1/Cargo.toml~
-	
 +++ alacritty-0.10.1/Cargo.toml
-	
 @@ -99,16 +99,3 @@ optional = true
-	
  default-features = false
-	
--[target."cfg(not(windows))".dependencies.xdg]
-	
--version = "2.4.0"
-
--
-
+ [target."cfg(not(windows))".dependencies.xdg]
+ version = "2.4.0"
 -[target."cfg(target_os = \"macos\")".dependencies.cocoa]
-	
 -version = "0.24.0"
-	
 -
-	
 -[target."cfg(target_os = \"macos\")".dependencies.objc]
-	
 -version = "0.2.2"
-	
 -
-	
 -[target."cfg(target_os = \"macos\")".dependencies.raw-window-handle]
-	
 -version = "0.4.0"
-	
 -[target."cfg(windows)".dependencies.winapi]
-	
 -version = "0.3.7"
-	
 -features = ["impl-default", "wincon"]
-	
 -[target."cfg(windows)".build-dependencies.embed-resource]
-	
 -version = "1.3"
