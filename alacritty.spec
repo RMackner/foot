@@ -48,7 +48,7 @@ Source8:        https://github.com/alacritty/alacritty/releases/download/v%{vers
 	
 # * drop windows- and mac OS-specific dependencies
 	
-Patch0:         alacritty-fix-metadata.diff
+#Patch0:         alacritty-fix-metadata.diff
 	
  
 	
