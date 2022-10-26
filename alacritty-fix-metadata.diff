@@ -1,7 +1,7 @@
 diff --git alacritty-0.11.0/Cargo.toml~ alacritty-0.11.0/Cargo.toml
 index 323b11f4eb..0597bc1001 100644
---- alacritty-0.10.1/Cargo.toml~
-+++ alacritty-0.10.1/Cargo.toml
+--- alacritty-0.11.0/Cargo.toml~
++++ alacritty-0.11.0/Cargo.toml
 @@ -99,16 +99,3 @@ optional = true
  default-features = false
  [target."cfg(not(windows))".dependencies.xdg]
