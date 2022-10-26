@@ -32,7 +32,7 @@ Source8:        https://github.com/alacritty/alacritty/releases/download/v%{vers
 
 # Initial patched metadata
 # * drop windows- and mac OS-specific dependencies
-Patch0:         alacritty-fix-metadata.diff
+#Patch0:         alacritty-fix-metadata.diff
 
 ExclusiveArch:  %{rust_arches}
 ExcludeArch:    s390x
