@@ -151,19 +151,20 @@ Requires:       ncurses-base
 	
 %install
 
-./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
-	
-# Will be installed to correct location with rpm macros
-	
+./pgo/pgo.sh /pgo/pgo.sh \
+    ${PGO} \
+    . build \
+    --prefix=/usr \
+    --wrap-mode=nodownload \
+    -Dterminfo=disabled \
+    -Dthemes=false
  
-	
- 
-	
- 
-	
+%check
+ninja -C build test
+
+
 
  
-	
  
 	
 %changelog
