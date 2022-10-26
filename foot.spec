@@ -145,10 +145,90 @@ Requires:       ncurses-base
 	
 %install
 ./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
-		
+cd foot
+DESTDIR=/builddir/build/BUILDROOT/foot-1.13.1-1.fc37.x86_64
+/usr/bin/meson install -C redhat-linux-build --no-rebuild
  
 	
-
+ 
+	
+%post
+	
+%systemd_user_post %{name}-server@.{service,socket}
+	
+ 
+	
+%preun
+	
+%systemd_user_preun %{name}-server@.{service,socket}
+	
+ 
+	
+ 
+	
+%files
+	
+%license LICENSE
+	
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
+	
+%{_bindir}/%{name}
+	
+%{_bindir}/%{name}client
+	
+%{_datadir}/%{name}/
+	
+%{_datadir}/applications/%{name}*.desktop
+	
+%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+	
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+	
+%{_datadir}/bash-completion/completions/foot*
+	
+%dir %{_datadir}/fish
+	
+%dir %{_datadir}/fish/vendor_completions.d
+	
+%{_datadir}/fish/vendor_completions.d/foot*
+	
+%dir %{_datadir}/zsh
+	
+%dir %{_datadir}/zsh/site-functions
+	
+%{_datadir}/zsh/site-functions/_%{name}
+	
+%{_datadir}/zsh/site-functions/_%{name}client
+	
+%dir %{_docdir}/%{name}
+	
+%doc %{_docdir}/%{name}/CHANGELOG.md
+	
+%doc %{_docdir}/%{name}/README.md
+	
+%{_mandir}/man1/%{name}.1*
+	
+%{_mandir}/man1/%{name}client.1*
+	
+%{_mandir}/man5/%{name}.ini.5*
+	
+%{_mandir}/man7/%{name}-ctlseqs.7*
+	
+%{_userunitdir}/%{name}-server@.service
+	
+%{_userunitdir}/%{name}-server@.socket
+	
+ 
+	
+%files terminfo
+	
+%license LICENSE
+	
+%dir %{_datadir}/terminfo/f
+	
+%{_datadir}/terminfo/f/%{name}
+	
+%{_datadir}/terminfo/f/%{name}-direct
 	
  
 	
