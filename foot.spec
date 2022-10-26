@@ -146,15 +146,7 @@ Requires:       ncurses-base
 	
 %build
 	
-	{
-./pgo/pgo.sh \
-    ${PGO} \
-    . build \
-    --prefix=/usr \
-    --wrap-mode=nodownload \
-    -Dterminfo=disabled \
-    -Dthemes=false
-}
+./pgo/pgo.sh auto
 
  
 	
