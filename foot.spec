@@ -148,13 +148,13 @@ Requires:       ncurses-base
 	
 export CFLAGS="$CFLAGS -O3"
 meson --buildtype=release --prefix=/usr -Db_lto=true ../..
-ninja
 	
 	
  
 	
 %install
-	
+
+ninja	
 ninja test
 ninja install
 	
