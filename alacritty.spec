@@ -35,6 +35,9 @@ However, it does allow configuration of many aspects of the terminal.
 %autosetup -n alacritty-%{githash} -p1
 %cargo_prep
 
+%generate_buildrequires
+%cargo_generate_buildrequires
+
 %build
 %cargo_build
 	
