@@ -174,12 +174,7 @@ Requires:       ncurses-base
  
 	
  
-	
-%files
-	
- 
-	
-%files terminfo
+
 	
  
 	
