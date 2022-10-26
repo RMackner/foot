@@ -163,10 +163,6 @@ rm %{buildroot}%{_docdir}/%{name}/LICENSE
 	
 %meson_test
 	
-desktop-file-validate \
-	
-    %{buildroot}/%{_datadir}/applications/%{name}*.desktop
-	
  
 	
  
