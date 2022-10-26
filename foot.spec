@@ -145,7 +145,7 @@ Requires:       ncurses-base
 	
 %install
 ./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
-cd /builddir/build/BUILDROOT/
+cd /builddir/build/BUILDROOT/foot-1.13.1-1.fc37.x86_64
 DESTDIR=/builddir/build/BUILDROOT/foot-1.13.1-1.fc37.x86_64
 /usr/bin/meson install -C redhat-linux-build --no-rebuild
  
