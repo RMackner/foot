@@ -32,10 +32,13 @@ By making sane choices for defaults, Alacritty requires no additional setup.
 However, it does allow configuration of many aspects of the terminal.
 
 %prep
-%setup -q -n alacritty-%{githash}
+%autosetup -n alacritty-%{githash} -p1
+%cargo_prep
 
 %build
-cargo build --release
+%cargo_build
+	
+
 
 %install
 install -p -D -m755 target/release/alacritty         %{buildroot}%{_bindir}/alacritty
