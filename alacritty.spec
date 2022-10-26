@@ -86,7 +86,7 @@ Requires:       libwayland-egl
 %{_datadir}/fish/vendor_completions.d/alacritty.fish
 
 %prep
-%autosetup -n %{crate}-%{version_no_tilde} -p1
+%autosetup -n %{crate}-%{version_no_tilde}
 %cargo_prep
 
 zcat %{SOURCE7} >alacritty.1
