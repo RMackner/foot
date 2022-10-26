@@ -147,7 +147,7 @@ Requires:       ncurses-base
 %build
 	
 	{
-./pgo/pgo.sh /pgo/pgo.sh \
+./pgo/pgo.sh \
     ${PGO} \
     . build \
     --prefix=/usr \
