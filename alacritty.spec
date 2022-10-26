@@ -87,7 +87,7 @@ Requires:       libwayland-egl
 
 %prep
 %autosetup -n %{crate}-%{version_no_tilde}
-%cargo_prep
+cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
 
 zcat %{SOURCE7} >alacritty.1
 zcat %{SOURCE8} >alacritty-msg.1
@@ -96,7 +96,7 @@ zcat %{SOURCE8} >alacritty-msg.1
 %cargo_generate_buildrequires
 
 %build
-%cargo_build
+CARGO_INCREMENTAL=0 cargo build --release --locked --offline
 
 %install
 %cargo_install
@@ -112,7 +112,7 @@ install -m644 -pDt %{buildroot}%{_mandir}/man1/ alacritty-msg.1
 %if %{with check}
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/Alacritty.desktop
-%cargo_test -- -- --skip config_read_eof stdout --skip completions stdout
+CARGO_INCREMENTAL=0 cargo test --locked --offline
 %endif
 
 %changelog
