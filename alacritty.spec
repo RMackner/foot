@@ -31,7 +31,7 @@ carefully considered and you can always expect Alacritty to be blazingly fast.
 By making sane choices for defaults, Alacritty requires no additional setup.
 However, it does allow configuration of many aspects of the terminal.
 
-%description -n %{crate} %{_description}
+%description -n alacritty
 	
  
 	
