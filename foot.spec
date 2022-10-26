@@ -146,11 +146,7 @@ Requires:       ncurses-base
 	
 %build
 	
-	
- 
-	
-%install
-
+	{
 ./pgo/pgo.sh /pgo/pgo.sh \
     ${PGO} \
     . build \
@@ -158,7 +154,12 @@ Requires:       ncurses-base
     --wrap-mode=nodownload \
     -Dterminfo=disabled \
     -Dthemes=false
+}
+
  
+	
+%install
+
 %check
 ninja -C build test
 
