@@ -146,11 +146,6 @@ Requires:       ncurses-base
  
 	
 %install
-
-	
-# Will be installed to correct location with rpm macros
-	
-rm %{buildroot}%{_docdir}/%{name}/LICENSE
 	
  
 		
