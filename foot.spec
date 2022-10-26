@@ -140,14 +140,11 @@ Requires:       ncurses-base
 	
 %build
 	
-./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
-	
 	
  
 	
 %install
-	
- 
+./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
 		
  
 	
