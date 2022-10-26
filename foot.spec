@@ -1,14 +1,8 @@
-%define githash 1313e6352a442bfd7483f7b6e14308f2cabdc684
-
-%define shorthash %(c=%{githash}; echo ${c:0:10})
-
-
-
 Name:           foot
 	
 Version:        1.13.1
 	
-Release:        1.git.%{shorthash}%{?dist}
+Release:        1%{?dist}
 	
 Summary:        Fast, lightweight and minimalistic Wayland terminal emulator
 	
@@ -18,7 +12,7 @@ License:        MIT
 	
 URL:            https://codeberg.org/dnkl/%{name}
 	
-Source0:        %{url}/archive/%{githash}.tar.gz
+Source0:        %{url}/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 	
  
 	
@@ -146,18 +140,117 @@ Requires:       ncurses-base
 	
 %build
 	
-./pgo/pgo.sh auto
-
+%meson
+	
+%meson_build
+	
+	
  
 	
 %install
-
-%check
-ninja -C build test
-
-
-
+	
+%meson_install
+	
+# Will be installed to correct location with rpm macros
+	
+rm %{buildroot}%{_docdir}/%{name}/LICENSE
+	
  
+	
+ 
+	
+%check
+	
+%meson_test
+	
+desktop-file-validate \
+	
+    %{buildroot}/%{_datadir}/applications/%{name}*.desktop
+	
+ 
+	
+ 
+	
+%post
+	
+%systemd_user_post %{name}-server@.{service,socket}
+	
+ 
+	
+%preun
+	
+%systemd_user_preun %{name}-server@.{service,socket}
+	
+ 
+	
+ 
+	
+%files
+	
+%license LICENSE
+	
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
+	
+%{_bindir}/%{name}
+	
+%{_bindir}/%{name}client
+	
+%{_datadir}/%{name}/
+	
+%{_datadir}/applications/%{name}*.desktop
+	
+%{_datadir}/icons/hicolor/48x48/apps/%{name}.png
+	
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+	
+%{_datadir}/bash-completion/completions/foot*
+	
+%dir %{_datadir}/fish
+	
+%dir %{_datadir}/fish/vendor_completions.d
+	
+%{_datadir}/fish/vendor_completions.d/foot*
+	
+%dir %{_datadir}/zsh
+	
+%dir %{_datadir}/zsh/site-functions
+	
+%{_datadir}/zsh/site-functions/_%{name}
+	
+%{_datadir}/zsh/site-functions/_%{name}client
+	
+%dir %{_docdir}/%{name}
+	
+%doc %{_docdir}/%{name}/CHANGELOG.md
+	
+%doc %{_docdir}/%{name}/README.md
+	
+%{_mandir}/man1/%{name}.1*
+	
+%{_mandir}/man1/%{name}client.1*
+	
+%{_mandir}/man5/%{name}.ini.5*
+	
+%{_mandir}/man7/%{name}-ctlseqs.7*
+	
+%{_userunitdir}/%{name}-server@.service
+	
+%{_userunitdir}/%{name}-server@.socket
+	
+ 
+	
+%files terminfo
+	
+%license LICENSE
+	
+%dir %{_datadir}/terminfo/f
+	
+%{_datadir}/terminfo/f/%{name}
+	
+%{_datadir}/terminfo/f/%{name}-direct
+	
+ 
+	
  
 	
 %changelog
