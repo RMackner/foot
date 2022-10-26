@@ -155,18 +155,7 @@ Requires:       ncurses-base
 	
 # Will be installed to correct location with rpm macros
 	
-rm %{buildroot}%{_docdir}/%{name}/LICENSE
-	
  
-	
- 
-	
-%check
-
-	
-desktop-file-validate \
-	
-    %{buildroot}/%{_datadir}/applications/%{name}*.desktop
 	
  
 	
