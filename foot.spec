@@ -146,17 +146,12 @@ Requires:       ncurses-base
 	
 %build
 	
-export CFLAGS="$CFLAGS -O3"
-meson --buildtype=release --prefix=/usr -Db_lto=true ../..
-	
 	
  
 	
 %install
 
-ninja	
-ninja test
-ninja install
+./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
 	
 # Will be installed to correct location with rpm macros
 	
