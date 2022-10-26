@@ -11,10 +11,11 @@ index 323b11f4eb..0597bc1001 100644
 	
  default-features = false
 	
- [target."cfg(not(windows))".dependencies.xdg]
+ -[target."cfg(not(windows))".dependencies.xdg]
 	
- version = "2.4.0"
-	
+ -version = "2.4.0"
+-
+
 -[target."cfg(target_os = \"macos\")".dependencies.cocoa]
 	
 -version = "0.24.0"
