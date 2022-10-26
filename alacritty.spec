@@ -31,6 +31,48 @@ carefully considered and you can always expect Alacritty to be blazingly fast.
 By making sane choices for defaults, Alacritty requires no additional setup.
 However, it does allow configuration of many aspects of the terminal.
 
+%description -n %{crate} %{_description}
+	
+ 
+	
+%files       -n alacritty
+	
+%license LICENSE-APACHE
+	
+%doc README.md
+	
+%{_bindir}/alacritty
+	
+%dir %{_datadir}/%{crate}
+	
+%{_mandir}/man1/alacritty.1*
+	
+%{_mandir}/man1/alacritty-msg.1*
+	
+%{_datadir}/applications/Alacritty.desktop
+	
+%{_datadir}/pixmaps/Alacritty.svg
+	
+%{_datadir}/%{crate}/alacritty.yml
+	
+%dir %{_datadir}/bash-completion
+	
+%dir %{_datadir}/bash-completion/completions
+	
+%{_datadir}/bash-completion/completions/alacritty
+	
+%dir %{_datadir}/zsh
+	
+%dir %{_datadir}/zsh/site-functions
+	
+%{_datadir}/zsh/site-functions/_alacritty
+	
+%dir %{_datadir}/fish
+	
+%dir %{_datadir}/fish/vendor_completions.d
+	
+%{_datadir}/fish/vendor_completions.d/alacritty.fish
+
 %prep
 %autosetup -n alacritty-%{githash} -p1
 %cargo_prep
