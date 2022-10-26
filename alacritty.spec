@@ -44,6 +44,8 @@ However, it does allow configuration of many aspects of the terminal.
 
 
 %install
+	
+%cargo_install
 install -p -D -m755 target/release/alacritty         %{buildroot}%{_bindir}/alacritty
 install -p -D -m644 extra/linux/Alacritty.desktop    %{buildroot}%{_datadir}/applications/Alacritty.desktop
 install -p -D -m644 extra/logo/alacritty-term.svg    %{buildroot}%{_datadir}/pixmaps/Alacritty.svg
