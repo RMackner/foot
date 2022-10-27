@@ -159,9 +159,6 @@ Requires:       ncurses-base
 	
 %meson_test
 	
-desktop-file-validate \
-	
-    %{buildroot}/%{_datadir}/applications/%{name}*.desktop
 	
 %post
 	
