@@ -139,7 +139,7 @@ Requires:       ncurses-base
  
 	
 %build
-./pgo/pgo.sh auto . /builddir/build/BUILD/foot
+./pgo/pgo.sh auto . /builddir/build/BUILD
  
 	
 %install
