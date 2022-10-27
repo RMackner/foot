@@ -139,12 +139,12 @@ Requires:       ncurses-base
  
 	
 %build
-./pgo/pgo.sh auto . /builddir/build/BUILD
+./pgo/pgo.sh auto . /builddir/build/BUILD/foot
  
 	
 %install
-	
- 
+cd /builddir/build/BUILD/foot
+/usr/bin/meson install -C redhat-linux-build --no-rebuild
 	
 %post
 	
