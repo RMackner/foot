@@ -139,13 +139,18 @@ Requires:       ncurses-base
  
 	
 %build
-./pgo/pgo.sh auto . /tmp/foot-pgo-build-output
-	
+{
+./pgo/pgo.sh \
+    ${PGO} \
+    . build \
+    --prefix=/usr \
+    --wrap-mode=nodownload \
+    -Dterminfo=disabled \
+    -Dthemes=false
+}	
  
 	
 %install
-%meson_install
- 
 	
  
 	
