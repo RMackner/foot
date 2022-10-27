@@ -186,7 +186,7 @@ Requires:       ncurses-base
 	
 %{_datadir}/%{name}/
 	
-%{_datadir}/applications/%{name}*.desktop
+%{_datadir}/applications/%{name}*
 	
 %{_datadir}/icons/hicolor/48x48/apps/%{name}.png
 	
