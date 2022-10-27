@@ -12,7 +12,7 @@ License:        MIT
 	
 URL:            https://codeberg.org/dnkl/%{name}
 	
-Source0:        https://codeberg.org/dnkl/foot.git
+Source0:        https://codeberg.org/dnkl/foot/archive/master.tar.gz
 	
  
 	
