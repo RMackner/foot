@@ -1,8 +1,13 @@
+%define githash 1313e6352a442bfd7483f7b6e14308f2cabdc684
+
+%define shorthash %(c=%{githash}; echo ${c:0:10})
+
+
 Name:           foot
 	
-Version:        master
+Version:        1.13.1
 	
-Release:        1%{?dist}
+Release:        1.git.%{shorthash}%{?dist}
 	
 Summary:        Fast, lightweight and minimalistic Wayland terminal emulator
 	
@@ -12,7 +17,7 @@ License:        MIT
 	
 URL:            https://codeberg.org/dnkl/%{name}
 	
-Source0:        https://codeberg.org/dnkl/foot/archive/master.tar.gz
+Source0:        %{url}/archive/%{githash}.tar.gz
 	
  
 	
