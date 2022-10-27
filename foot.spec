@@ -143,7 +143,6 @@ Requires:       ncurses-base
 ./pgo/pgo.sh \
     ${PGO} \
     . build \
-    --prefix=/usr \
     --wrap-mode=nodownload \
     -Dterminfo=disabled \
     -Dthemes=false
