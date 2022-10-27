@@ -139,11 +139,33 @@ Requires:       ncurses-base
  
 	
 %build
-./pgo/pgo.sh auto . /builddir/build/_BUILD
+	
+%meson
+	
+%meson_build
+	
+	
  
 	
 %install
-/usr/bin/meson install -C redhat-linux-build --no-rebuild
+	
+%meson_install
+	
+# Will be installed to correct location with rpm macros
+	
+rm %{buildroot}%{_docdir}/%{name}/LICENSE
+	
+ 
+	
+ 
+	
+%check
+	
+%meson_test
+	
+desktop-file-validate \
+	
+    %{buildroot}/%{_datadir}/applications/%{name}*.desktop
 	
 %post
 	
