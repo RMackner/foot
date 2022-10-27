@@ -1,6 +1,6 @@
 Name:           foot
 	
-Version:        1.13.1
+Version:        master
 	
 Release:        1%{?dist}
 	
@@ -223,6 +223,13 @@ Requires:       ncurses-base
 %{_userunitdir}/%{name}-server@.service
 	
 %{_userunitdir}/%{name}-server@.socket
+
+%{_datadir}/applications/*.desktop
+
+%{_datadir}/doc/foot/LICENSE
+
+
+
 	
  
 	
