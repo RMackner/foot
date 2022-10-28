@@ -144,17 +144,11 @@ Requires:       ncurses-base
  
 	
 %build
-	
-%meson
-	
-%meson_build
-	
-	
- 
-	
+CC=clang CXX=clang++ meson build-clang
+
 %install
-	
-%meson_install
+export DESTDIR=%{buildroot}
+ninja -C build-clang install
 	
  
 	
