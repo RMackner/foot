@@ -30,6 +30,12 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  python3
 	
 BuildRequires:  systemd-rpm-macros
+
+BuildRequires:  clang
+
+BuildRequires:  llvm
+
+BuildRequires:  llvm-devel
 	
  
 	
