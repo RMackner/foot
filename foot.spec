@@ -30,12 +30,6 @@ BuildRequires:  desktop-file-utils
 BuildRequires:  python3
 	
 BuildRequires:  systemd-rpm-macros
-
-BuildRequires:  clang
-
-BuildRequires:  llvm
-
-BuildRequires:  llvm-devel
 	
  
 	
@@ -150,11 +144,17 @@ Requires:       ncurses-base
  
 	
 %build
-CC=clang CXX=clang++ meson build-clang
-
+	
+%meson
+	
+%meson_build
+	
+	
+ 
+	
 %install
-export DESTDIR=%{buildroot}
-ninja -C build-clang install
+	
+%meson_install
 	
  
 	
